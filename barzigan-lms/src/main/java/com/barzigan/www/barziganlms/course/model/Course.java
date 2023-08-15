@@ -37,6 +37,8 @@ public class Course implements Serializable {
     @Column(nullable = false)
     private int capacity;
 
+    private int preRequirement;
+
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Topic> topics;
 
@@ -45,6 +47,7 @@ public class Course implements Serializable {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Payment> payments;
+
 
 
 }
