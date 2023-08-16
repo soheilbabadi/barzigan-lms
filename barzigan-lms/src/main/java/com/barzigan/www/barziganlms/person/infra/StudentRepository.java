@@ -4,20 +4,18 @@ import com.barzigan.www.barziganlms.person.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Integer> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    Student findByEmail(String email);
+    Optional<Student> findByEmail(String email);
 
-    Student findByNationalCode(String nationalCode);
+    Optional<Student> findByNationalCode(String nationalCode);
 
-    Student findByPhoneNumber(String phoneNumber);
+    Optional<Student> findByPhoneNumber(String phoneNumber);
 
-    Student findByEmailAndPassword(String email, String password);
 
-    Student findByNationalCodeAndPassword(String nationalCode, String password);
+    Optional<Student> findByNationalCodeOrEmailAndPassword(String nationalCode, String email, String password);
 
-    Student findByPhoneNumberAndPassword(String phoneNumber, String password);
-
-    Student findByEmailAndNationalCode(String email, String nationalCode);
 }
