@@ -45,5 +45,7 @@ public class StudentDto implements Serializable {
     private String birthDate;
 
     private LocalDateTime registerDate;
+    private String role;
+    private String username;
 
 }

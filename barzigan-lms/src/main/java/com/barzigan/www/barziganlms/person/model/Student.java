@@ -63,4 +63,10 @@ public class Student implements Serializable {
 
     private LocalDateTime registerDate;
 
+    @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
+    private String role;
+
+    @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
+    private String username;
+
 }

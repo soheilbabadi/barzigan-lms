@@ -1,6 +1,7 @@
-package com.barzigan.www.barziganlms.person.model;
+package com.barzigan.www.barziganlms.payment;
 
 import com.barzigan.www.barziganlms.course.model.Course;
+import com.barzigan.www.barziganlms.person.model.Student;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
