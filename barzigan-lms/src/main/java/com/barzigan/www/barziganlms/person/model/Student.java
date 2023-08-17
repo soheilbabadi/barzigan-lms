@@ -52,8 +52,6 @@ public class Student implements Serializable {
     @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
     private String province;
 
-    @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
-    private String country;
 
     @Column(nullable = false, length = 10, columnDefinition = "varchar(10)")
     private String nationalCode;

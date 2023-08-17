@@ -26,7 +26,7 @@ public class Payment implements Serializable {
     private long id;
 
     @ManyToOne(cascade = CascadeType.ALL, targetEntity = Student.class)
-    private long student;
+    private Student student;
 
     @ManyToOne(cascade = CascadeType.ALL, targetEntity = Course.class)
     private Course course;

@@ -38,8 +38,6 @@ public class StudentDto implements Serializable {
 
     private String province;
 
-    private String country;
-
     private String nationalCode;
 
     private String birthDate;
