@@ -1,6 +1,7 @@
 package com.barzigan.www.barziganlms.person.application;
 
 import com.barzigan.www.barziganlms.person.infra.StudentRepository;
+import com.barzigan.www.barziganlms.person.model.LoginDto;
 import com.barzigan.www.barziganlms.person.model.Student;
 import com.barzigan.www.barziganlms.person.model.StudentDto;
 import org.springframework.beans.BeanUtils;
@@ -11,6 +12,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
+
+import static com.barzigan.www.barziganlms.utils.RandomString.gerRandomString;
 
 @Service
 public class StudentServiceImpl {
@@ -45,7 +48,8 @@ public class StudentServiceImpl {
 
     public StudentDto findByEmail(String email) {
 
-        var student = studentRepository.findByEmail(email);
+        var student = studentRepository.findByEmail(email)
+                .orElseThrow(() -> new NullPointerException("Student not found"));
         var dto = new StudentDto();
         BeanUtils.copyProperties(student, dto);
 
@@ -54,7 +58,8 @@ public class StudentServiceImpl {
 
     public StudentDto findByNationalCode(String nationalCode) {
 
-        var student = studentRepository.findByNationalCode(nationalCode);
+        var student = studentRepository.findByNationalCode(nationalCode)
+                .orElseThrow(() -> new NullPointerException("Student not found"));
         var dto = new StudentDto();
         BeanUtils.copyProperties(student, dto);
 
@@ -63,26 +68,28 @@ public class StudentServiceImpl {
 
     public StudentDto findByPhoneNumber(String phoneNumber) {
 
-        var student = studentRepository.findByPhoneNumber(phoneNumber);
+        var student = studentRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new NullPointerException("Student not found"));
         var dto = new StudentDto();
         BeanUtils.copyProperties(student, dto);
 
         return dto;
     }
 
-    public StudentDto findByUsernameAndPassword(String username, String password) {
+    public StudentDto findByUsernameAndPassword(LoginDto dto) {
 
-        var student = studentRepository.findByNationalCodeOrEmailAndPassword(username, username, password);
-        var dto = new StudentDto();
-        BeanUtils.copyProperties(student, dto);
+        var student = studentRepository.findByNationalCodeOrEmailAndPassword(dto.getUsername(), dto.getUsername(), dto.getPassword())
+                .orElseThrow(() -> new NullPointerException("Student not found"));
+        var studentDto = new StudentDto();
+        BeanUtils.copyProperties(student, studentDto);
 
-        return dto;
+        return studentDto;
     }
 
     public void update(StudentDto studentDto) {
 
         var student = studentRepository.findById(studentDto.getId())
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new NullPointerException("Student not found"));
 
         BeanUtils.copyProperties(studentDto, student);
 
@@ -95,8 +102,18 @@ public class StudentServiceImpl {
 
         var student = new Student();
         BeanUtils.copyProperties(studentDto, student);
-        student.setRegisterDate(LocalDateTime.now(TimeZone.getTimeZone("UTC").toZoneId()));
-        var p = studentRepository.save(student);
+        student.setRegisterOn(LocalDateTime.now(TimeZone.getTimeZone("UTC").toZoneId()));
+        student.setLastLoginOn(student.getRegisterOn());
+        student.setVerified(false);
+        student.setAccountNonExpired(true);
+        student.setRole("ROLE_STUDENT");
+        student.setAccountNonLocked(true);
+        student.setEnabled(true);
+        student.setUsername(gerRandomString(10));
+        student.setCredentialsNonExpired(true);
+
+        studentRepository.save(student);
+
     }
 
     public void delete(long id) {
@@ -107,4 +124,7 @@ public class StudentServiceImpl {
         studentRepository.delete(student);
     }
 
+    public boolean isUserExists(StudentDto studentDto) {
+        return studentRepository.findByNationalCode(studentDto.getNationalCode()).isPresent() || studentRepository.findByEmail(studentDto.getEmail()).isPresent() || studentRepository.findByPhoneNumber(studentDto.getPhoneNumber()).isPresent();
+    }
 }
