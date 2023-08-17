@@ -16,7 +16,6 @@ public class LoginDto implements Serializable {
     @Serial
     private static final long serialVersionUID = 3781407433028672507L;
 
-    private String email;
-    private String nationalCode;
+    private String username;
     private String password;
 }

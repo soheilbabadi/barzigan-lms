@@ -61,12 +61,33 @@ public class Student implements Serializable {
     @Column(nullable = false, length = 10, columnDefinition = "varchar(10)")
     private String birthDate;
 
-    private LocalDateTime registerDate;
 
     @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
     private String role;
 
     @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
     private String username;
+
+
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime registerOn;
+
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime lastLoginOn;
+
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean verified;
+
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean accountNonExpired;
+
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean accountNonLocked;
+
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean credentialsNonExpired;
+
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean enabled;
 
 }

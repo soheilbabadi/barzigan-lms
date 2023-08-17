@@ -1,5 +1,6 @@
 package com.barzigan.www.barziganlms.person.model;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class StudentDto implements Serializable {
     @Serial
     private static final long serialVersionUID = 3270359019687867399L;
 
-    private long id;
+    private Long id;
 
     private String firstName;
 
@@ -47,5 +48,21 @@ public class StudentDto implements Serializable {
     private LocalDateTime registerDate;
     private String role;
     private String username;
+
+
+    private LocalDateTime registerOn;
+
+    private LocalDateTime lastLoginOn;
+
+    private boolean verified;
+
+    private boolean accountNonExpired;
+
+    private boolean accountNonLocked;
+
+    private boolean credentialsNonExpired;
+
+    private boolean enabled;
+
 
 }
