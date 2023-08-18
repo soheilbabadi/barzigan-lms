@@ -1,4 +1,5 @@
-package com.barzigan.www.barziganlms.person.model;
+package com.barzigan.www.barziganlms.auth.model;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,26 +8,24 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Data
-public class StudentDto implements Serializable {
+public class AuthenticationResponse implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 3270359019687867399L;
-
-    private Long id;
+    private static final long serialVersionUID = 9015213464421899929L;
+    private String token;
 
     private String firstName;
 
     private String lastName;
 
     private String email;
-
-    private String password;
 
     private String phoneNumber;
 
@@ -40,11 +39,10 @@ public class StudentDto implements Serializable {
 
     private String nationalCode;
 
-    private String birthDate;
+    private LocalDate birthDate;
 
     private LocalDateTime registerDate;
     private String role;
-    private String username;
 
 
     private LocalDateTime registerOn;
@@ -60,6 +58,4 @@ public class StudentDto implements Serializable {
     private boolean credentialsNonExpired;
 
     private boolean enabled;
-
-
 }

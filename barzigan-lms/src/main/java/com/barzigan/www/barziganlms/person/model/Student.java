@@ -10,10 +10,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,15 +59,15 @@ public class Student implements UserDetails {
     @Column(nullable = false, length = 10, columnDefinition = "varchar(10)")
     private String nationalCode;
 
-    @Column(nullable = false, length = 10, columnDefinition = "varchar(10)")
-    private String birthDate;
+    @Column(nullable = false)
+    private LocalDate birthDate;
 
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
+    @Column(nullable = false, length = 500, columnDefinition = "varchar(500)")
     private String username;
 
 

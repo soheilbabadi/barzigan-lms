@@ -18,6 +18,7 @@ import java.util.function.Function;
 public  class JwtService {
 
     public String extractUsername(String jwt) {
+
         return extractClaims(jwt, Claims::getSubject);
     }
 
@@ -49,15 +50,15 @@ public  class JwtService {
     }
 
     public <T> T extractClaims(String jwt, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllCliams(jwt);
+        final Claims claims = extractAllClams(jwt);
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllCliams(String token) {
+    private Claims extractAllClams(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
     }
 

@@ -1,4 +1,4 @@
-package com.barzigan.www.barziganlms.person.model;
+package com.barzigan.www.barziganlms.auth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +12,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @Builder
-public class LoginDto implements Serializable {
+public class RegisterRequestDto implements Serializable {
     @Serial
-    private static final long serialVersionUID = 3781407433028672507L;
+    private static final long serialVersionUID = -2755960199028095743L;
 
-    private String username;
+    private String email;
     private String password;
 }

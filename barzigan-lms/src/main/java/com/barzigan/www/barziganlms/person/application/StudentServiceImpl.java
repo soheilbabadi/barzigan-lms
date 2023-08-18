@@ -1,7 +1,7 @@
 package com.barzigan.www.barziganlms.person.application;
 
+import com.barzigan.www.barziganlms.auth.model.RegisterRequestDto;
 import com.barzigan.www.barziganlms.person.infra.StudentRepository;
-import com.barzigan.www.barziganlms.person.model.LoginDto;
 import com.barzigan.www.barziganlms.person.model.Role;
 import com.barzigan.www.barziganlms.person.model.Student;
 import com.barzigan.www.barziganlms.person.model.StudentDto;
@@ -83,9 +83,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDto findByUsernameAndPassword(LoginDto dto) {
+    public StudentDto findByUsernameAndPassword(RegisterRequestDto dto) {
 
-        var student = studentRepository.findByNationalCodeOrEmailAndPassword(dto.getUsername(), dto.getUsername(), dto.getPassword())
+        var student = studentRepository.findByEmailAndPassword(dto.getEmail(), dto.getPassword())
                 .orElseThrow(() -> new NullPointerException("Student not found"));
         var studentDto = new StudentDto();
         BeanUtils.copyProperties(student, studentDto);
@@ -118,7 +118,7 @@ public class StudentServiceImpl implements StudentService {
         student.setRole(Role.STUDENT);
         student.setAccountNonLocked(true);
         student.setEnabled(true);
-        student.setUsername(gerRandomString(10));
+        student.setUsername(gerRandomString(50));
         student.setCredentialsNonExpired(true);
 
         studentRepository.save(student);

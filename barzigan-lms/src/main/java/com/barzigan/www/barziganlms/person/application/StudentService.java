@@ -1,6 +1,6 @@
 package com.barzigan.www.barziganlms.person.application;
 
-import com.barzigan.www.barziganlms.person.model.LoginDto;
+import com.barzigan.www.barziganlms.auth.model.RegisterRequestDto;
 import com.barzigan.www.barziganlms.person.model.StudentDto;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface StudentService {
 
     StudentDto findByPhoneNumber(String phoneNumber);
 
-    StudentDto findByUsernameAndPassword(LoginDto dto);
+    StudentDto findByUsernameAndPassword(RegisterRequestDto dto);
 
     void update(StudentDto studentDto);
 
