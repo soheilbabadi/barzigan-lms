@@ -13,19 +13,19 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Builder
-@Enabled
-public class Role implements Serializable {
+public enum Role   {
+    STUDENT("student"),
+    TEACHER("teacher"),
+    ADMIN("admin");
 
-    @Serial
-    private static final long serialVersionUID = 5000815601300780000L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private final String role;
 
-    @Column(nullable = false, length = 50, columnDefinition = "varchar(50)", unique = true)
-    private String title;
+    Role(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
 }

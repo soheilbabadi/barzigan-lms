@@ -2,6 +2,7 @@ package com.barzigan.www.barziganlms.person.application;
 
 import com.barzigan.www.barziganlms.person.infra.StudentRepository;
 import com.barzigan.www.barziganlms.person.model.LoginDto;
+import com.barzigan.www.barziganlms.person.model.Role;
 import com.barzigan.www.barziganlms.person.model.Student;
 import com.barzigan.www.barziganlms.person.model.StudentDto;
 import org.springframework.beans.BeanUtils;
@@ -16,7 +17,7 @@ import java.util.TimeZone;
 import static com.barzigan.www.barziganlms.utils.RandomString.gerRandomString;
 
 @Service
-public class StudentServiceImpl {
+public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
@@ -25,6 +26,7 @@ public class StudentServiceImpl {
         this.studentRepository = studentRepository;
     }
 
+    @Override
     public List<StudentDto> findAll() {
 
         var list = studentRepository.findAll();
@@ -37,6 +39,7 @@ public class StudentServiceImpl {
         return result;
     }
 
+    @Override
     public StudentDto findById(long id) {
 
         var student = studentRepository.findById(id);
@@ -46,6 +49,7 @@ public class StudentServiceImpl {
         return dto;
     }
 
+    @Override
     public StudentDto findByEmail(String email) {
 
         var student = studentRepository.findByEmail(email)
@@ -56,6 +60,7 @@ public class StudentServiceImpl {
         return dto;
     }
 
+    @Override
     public StudentDto findByNationalCode(String nationalCode) {
 
         var student = studentRepository.findByNationalCode(nationalCode)
@@ -66,6 +71,7 @@ public class StudentServiceImpl {
         return dto;
     }
 
+    @Override
     public StudentDto findByPhoneNumber(String phoneNumber) {
 
         var student = studentRepository.findByPhoneNumber(phoneNumber)
@@ -76,6 +82,7 @@ public class StudentServiceImpl {
         return dto;
     }
 
+    @Override
     public StudentDto findByUsernameAndPassword(LoginDto dto) {
 
         var student = studentRepository.findByNationalCodeOrEmailAndPassword(dto.getUsername(), dto.getUsername(), dto.getPassword())
@@ -86,6 +93,7 @@ public class StudentServiceImpl {
         return studentDto;
     }
 
+    @Override
     public void update(StudentDto studentDto) {
 
         var student = studentRepository.findById(studentDto.getId())
@@ -98,6 +106,7 @@ public class StudentServiceImpl {
     }
 
 
+    @Override
     public void create(StudentDto studentDto) {
 
         var student = new Student();
@@ -106,7 +115,7 @@ public class StudentServiceImpl {
         student.setLastLoginOn(student.getRegisterOn());
         student.setVerified(false);
         student.setAccountNonExpired(true);
-        student.setRole("ROLE_STUDENT");
+        student.setRole(Role.STUDENT);
         student.setAccountNonLocked(true);
         student.setEnabled(true);
         student.setUsername(gerRandomString(10));
@@ -116,6 +125,7 @@ public class StudentServiceImpl {
 
     }
 
+    @Override
     public void delete(long id) {
 
         var student = studentRepository.findById(id)
@@ -124,6 +134,7 @@ public class StudentServiceImpl {
         studentRepository.delete(student);
     }
 
+    @Override
     public boolean isUserExists(StudentDto studentDto) {
         return studentRepository.findByNationalCode(studentDto.getNationalCode()).isPresent() || studentRepository.findByEmail(studentDto.getEmail()).isPresent() || studentRepository.findByPhoneNumber(studentDto.getPhoneNumber()).isPresent();
     }
