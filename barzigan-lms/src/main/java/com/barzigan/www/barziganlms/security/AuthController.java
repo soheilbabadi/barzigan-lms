@@ -23,5 +23,10 @@ public class AuthController {
         return  ResponseEntity.ok(studentService.findByUsernameAndPassword(dto));
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginDto dto){
+
+        return  ResponseEntity.ok(studentService.findByUsernameAndPassword(dto));
+    }
 
 }
