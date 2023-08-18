@@ -18,7 +18,7 @@ public class AuthController {
     @Autowired
     private StudentService studentService;
     @PostMapping("/register")
-    public ResponseEntity<Authenticationrespnse> register(@RequestBody LoginDto dto){
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody LoginDto dto){
 
         return  ResponseEntity.ok(studentService.findByUsernameAndPassword(dto));
     }

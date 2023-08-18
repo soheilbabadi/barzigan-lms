@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Authenticationrespnse implements Serializable {
+public class AuthenticationResponse implements Serializable {
 
     private String token;
 }
