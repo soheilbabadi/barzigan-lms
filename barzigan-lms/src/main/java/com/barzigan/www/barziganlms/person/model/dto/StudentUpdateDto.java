@@ -1,4 +1,4 @@
-package com.barzigan.www.barziganlms.person.model;
+package com.barzigan.www.barziganlms.person.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,14 +18,14 @@ public class StudentUpdateDto implements Serializable {
     @Serial
     private static final long serialVersionUID = 3330359019687867399L;
 
-    private Long id;
 
     private String firstName;
 
     private String lastName;
 
     private String email;
-private String username;
+
+    private String username;
 
     private String phoneNumber;
 
@@ -41,11 +40,5 @@ private String username;
     private String nationalCode;
 
     private LocalDate birthDate;
-
-
-
-
-
-
 
 }

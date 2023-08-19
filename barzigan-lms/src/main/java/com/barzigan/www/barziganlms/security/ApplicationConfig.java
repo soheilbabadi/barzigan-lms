@@ -24,14 +24,8 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) {
-                return studentRepository.findByUsername(username)
-                        .orElseThrow(() -> new NullPointerException("Student not found"));
-
-            }
-        };
+        return username -> studentRepository.findByUsername(username)
+                .orElseThrow(() -> new NullPointerException("Student not found"));
     }
 
     @Bean

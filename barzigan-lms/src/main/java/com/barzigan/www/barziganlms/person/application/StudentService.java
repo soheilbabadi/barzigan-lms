@@ -1,8 +1,7 @@
 package com.barzigan.www.barziganlms.person.application;
 
-import com.barzigan.www.barziganlms.auth.model.RegisterRequestDto;
-import com.barzigan.www.barziganlms.person.model.StudentDto;
-import com.barzigan.www.barziganlms.person.model.StudentUpdateDto;
+import com.barzigan.www.barziganlms.person.model.dto.StudentDto;
+import com.barzigan.www.barziganlms.person.model.dto.StudentUpdateDto;
 
 import java.util.List;
 

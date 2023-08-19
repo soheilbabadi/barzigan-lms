@@ -39,4 +39,7 @@ public class Payment implements Serializable {
     @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
     private String paymentStatus;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean verified;
+
 }
