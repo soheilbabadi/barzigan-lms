@@ -27,9 +27,9 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/public/**","/api/v1/auth/**","/swagger-ui/**","/v3/api-docs/**").permitAll()
-
-                        .anyRequest().authenticated()
+//                        .requestMatchers("/api/**","/api/v1/auth/**","/swagger-ui/**","/v3/api-docs/**").permitAll()
+                        .anyRequest().permitAll()
+//                        .anyRequest().authenticated()
                 )
 
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

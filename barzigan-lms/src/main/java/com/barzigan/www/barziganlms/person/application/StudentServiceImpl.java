@@ -84,27 +84,35 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public StudentDto update(StudentUpdateDto dto) {
+    public String update(StudentUpdateDto dto) {
 
-        var student = studentRepository.findById(dto.getId())
+        var student = studentRepository.findByUsername(dto.getUsername())
                 .orElseThrow(() -> new NullPointerException("Student not found"));
 
 
-        var existStd = studentRepository.findByNationalCode(dto.getNationalCode());
-        if (existStd.isPresent() && existStd.get().getId() != dto.getId())
-            throw new RuntimeException("National code is already exists");
+//        var existStd = studentRepository.findByNationalCode(dto.getNationalCode());
+//        if (existStd.isPresent() && existStd.get().getId() != dto.getId())
+//            throw new RuntimeException("National code is already exists");
+//
+//        existStd = studentRepository.findByEmail(dto.getEmail());
+//        if (existStd.isPresent() && existStd.get().getId() != dto.getId())
+//            throw new RuntimeException("Email is already exists");
+//
+//        existStd = studentRepository.findByPhoneNumber(dto.getPhoneNumber());
+//        if (existStd.isPresent() && existStd.get().getId() != dto.getId())
+//            throw new RuntimeException("Phone number is already exists");
 
-        existStd = studentRepository.findByEmail(dto.getEmail());
-        if (existStd.isPresent() && existStd.get().getId() != dto.getId())
-            throw new RuntimeException("Email is already exists");
+        student.setFirstName(dto.getFirstName());
+        student.setLastName(dto.getLastName());
+        student.setAddress(dto.getAddress());
+        student.setBirthDate(dto.getBirthDate());
+        student.setCity(dto.getCity());
+        student.setNationalCode(dto.getNationalCode());
+        student.setPhoneNumber(dto.getPhoneNumber());
+        student.setPostalCode(dto.getPostalCode());
+        student.setProvince(dto.getProvince());
 
-        existStd = studentRepository.findByPhoneNumber(dto.getPhoneNumber());
-        if (existStd.isPresent() && existStd.get().getId() != dto.getId())
-            throw new RuntimeException("Phone number is already exists");
-
-        BeanUtils.copyProperties(dto, student);
-        studentRepository.save(student);
-        return findByEmail(dto.getEmail());
+        return studentRepository.save(student).getUsername();
     }
 
     @Override

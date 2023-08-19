@@ -17,7 +17,7 @@ public interface StudentService {
 
     StudentDto findByPhoneNumber(String phoneNumber);
 
-    StudentDto update(StudentUpdateDto studentDto);
+    String update(StudentUpdateDto studentDto);
 
     void create(StudentDto studentDto);
 

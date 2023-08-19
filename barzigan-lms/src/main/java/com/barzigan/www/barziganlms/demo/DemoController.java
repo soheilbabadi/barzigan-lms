@@ -13,15 +13,13 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class DemoController {
     @GetMapping
     public ResponseEntity<ResponseDemo> get() {
-        var currentRequestAttributes = RequestContextHolder.currentRequestAttributes();
-        var result = currentRequestAttributes.getAttribute("token", ServletRequestAttributes.SCOPE_REQUEST).toString();
 
         ResponseDemo responseDemo = ResponseDemo.builder()
-                .token(result)
+                .token("")
                 .username("username")
                 .build();
 
-        System.out.print(responseDemo.getToken());
+
         return new ResponseEntity<>(responseDemo, HttpStatus.OK);
     }
 

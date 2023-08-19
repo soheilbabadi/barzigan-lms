@@ -2,10 +2,10 @@ package com.barzigan.www.barziganlms.person.presentation;
 
 
 import com.barzigan.www.barziganlms.person.application.StudentService;
-import com.barzigan.www.barziganlms.person.model.StudentDto;
 import com.barzigan.www.barziganlms.person.model.StudentUpdateDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +19,8 @@ public class StudentController {
     private StudentService studentService;
 
     @PutMapping
-    public ResponseEntity<StudentDto> update(@RequestBody StudentUpdateDto dto) {
-
-        return ResponseEntity.ok(studentService.update(dto));
+    public ResponseEntity<String> update(@RequestBody StudentUpdateDto dto) {
+        return new ResponseEntity<>(studentService.update(dto), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
