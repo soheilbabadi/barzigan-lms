@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/barzigan-lms.iml" filepath="$PROJECT_DIR$/.idea/barzigan-lms.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/barzigan-lms.barzigan-lms.main~1.iml" filepath="$PROJECT_DIR$/.idea/modules/barzigan-lms.barzigan-lms.main~1.iml" />
     </modules>
   </component>
 </project>
