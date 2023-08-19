@@ -7,7 +7,9 @@ import com.barzigan.www.barziganlms.person.model.Role;
 import com.barzigan.www.barziganlms.person.model.Student;
 import com.barzigan.www.barziganlms.security.JwtService;
 import com.barzigan.www.barziganlms.utils.RandomString;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.TimeZone;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -31,10 +34,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthenticationResponse register(RegisterRequestDto dto) {
 
-        String username = passwordEncoder.encode(dto.getEmail());
+        String username = RandomString.gerRandomString(50);
 
-        var person = Student.builder().firstName("").registerOn(LocalDateTime.now(TimeZone.getTimeZone("UTC").toZoneId()))
-                .lastLoginOn(LocalDateTime.now(TimeZone.getTimeZone("UTC").toZoneId()))
+        var person = Student.builder().firstName("")
+
                 .accountNonExpired(true)
                 .accountNonLocked(true)
                 .address("")
@@ -43,7 +46,10 @@ public class AuthServiceImpl implements AuthService {
                 .enabled(true)
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .birthDate(LocalDate.now().minusYears(18))
-                .username(dto.getEmail())
+                .registerOn(LocalDateTime.now(TimeZone.getTimeZone("UTC").toZoneId()))
+                .lastLoginOn(LocalDateTime.now(TimeZone.getTimeZone("UTC").toZoneId()))
+                .role(Role.STUDENT)
+                .username(username)
                 .lastName("")
                 .phoneNumber("")
                 .nationalCode("")
@@ -61,42 +67,32 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthenticationResponse authenticate(RegisterRequestDto dto) {
-
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword()));
+    public AuthenticationResponse authenticate( RegisterRequestDto dto) {
         var person = studentRepository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new RuntimeException("user not found"));
 
-
-
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(person.getUsername(), dto.getPassword()));
         person.setLastLoginOn(LocalDateTime.now(TimeZone.getTimeZone("UTC").toZoneId()));
         studentRepository.save(person);
         return generateResponse(person);
 
     }
 
-    private AuthenticationResponse generateResponse(Student person) {
-        var jwtToken = jwtService.generateToken(person);
-        return AuthenticationResponse.builder().token(jwtToken)
-                .email(person.getEmail())
-                .firstName(person.getFirstName())
-                .lastName(person.getLastName())
-                .birthDate(person.getBirthDate())
-                .registerDate(person.getRegisterOn())
-                .role(person.getRole().name())
-                .lastLoginOn(person.getLastLoginOn())
-                .verified(person.isVerified())
-                .accountNonExpired(person.isAccountNonExpired())
-                .accountNonLocked(person.isAccountNonLocked())
-                .credentialsNonExpired(person.isCredentialsNonExpired())
-                .enabled(person.isEnabled())
-                .city(person.getCity())
-                .province(person.getProvince())
-                .address(person.getAddress())
-                .phoneNumber(person.getPhoneNumber())
-                .postalCode(person.getPostalCode())
-                .nationalCode(person.getNationalCode())
-                .build();
+    @Override
+    public String extractUsername(String token) {
+      return jwtService.extractUsername(token);
     }
+
+    private AuthenticationResponse generateResponse(Student person) {
+
+        var jwtToken = jwtService.generateToken(person);
+        var authResponse= new AuthenticationResponse();
+        BeanUtils.copyProperties(person, authResponse);
+        authResponse.setToken(jwtToken);
+
+        return authResponse;
+    }
+
+
 
 }

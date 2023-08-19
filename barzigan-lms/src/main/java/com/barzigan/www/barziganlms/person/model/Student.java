@@ -27,6 +27,7 @@ public class Student implements UserDetails {
     private static final long serialVersionUID = -8201159332089107693L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
@@ -67,7 +68,7 @@ public class Student implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(nullable = false, length = 500, columnDefinition = "varchar(500)")
+    @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
     private String username;
 
 

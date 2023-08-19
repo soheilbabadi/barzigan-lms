@@ -2,6 +2,7 @@ package com.barzigan.www.barziganlms.person.application;
 
 import com.barzigan.www.barziganlms.auth.model.RegisterRequestDto;
 import com.barzigan.www.barziganlms.person.model.StudentDto;
+import com.barzigan.www.barziganlms.person.model.StudentUpdateDto;
 
 import java.util.List;
 
@@ -16,13 +17,11 @@ public interface StudentService {
 
     StudentDto findByPhoneNumber(String phoneNumber);
 
-    StudentDto findByUsernameAndPassword(RegisterRequestDto dto);
-
-    void update(StudentDto studentDto);
+    StudentDto update(StudentUpdateDto studentDto);
 
     void create(StudentDto studentDto);
 
-    void delete(long id);
+    void delete(String username);
 
     boolean isUserExists(StudentDto studentDto);
 }

@@ -1,10 +1,10 @@
 package com.barzigan.www.barziganlms.person.application;
 
-import com.barzigan.www.barziganlms.auth.model.RegisterRequestDto;
 import com.barzigan.www.barziganlms.person.infra.StudentRepository;
 import com.barzigan.www.barziganlms.person.model.Role;
 import com.barzigan.www.barziganlms.person.model.Student;
 import com.barzigan.www.barziganlms.person.model.StudentDto;
+import com.barzigan.www.barziganlms.person.model.StudentUpdateDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,29 +82,30 @@ public class StudentServiceImpl implements StudentService {
         return dto;
     }
 
-    @Override
-    public StudentDto findByUsernameAndPassword(RegisterRequestDto dto) {
-
-        var student = studentRepository.findByEmailAndPassword(dto.getEmail(), dto.getPassword())
-                .orElseThrow(() -> new NullPointerException("Student not found"));
-        var studentDto = new StudentDto();
-        BeanUtils.copyProperties(student, studentDto);
-
-        return studentDto;
-    }
 
     @Override
-    public void update(StudentDto studentDto) {
+    public StudentDto update(StudentUpdateDto dto) {
 
-        var student = studentRepository.findById(studentDto.getId())
+        var student = studentRepository.findById(dto.getId())
                 .orElseThrow(() -> new NullPointerException("Student not found"));
 
-        BeanUtils.copyProperties(studentDto, student);
 
-        var p = studentRepository.save(student);
+        var existStd = studentRepository.findByNationalCode(dto.getNationalCode());
+        if (existStd.isPresent() && existStd.get().getId() != dto.getId())
+            throw new RuntimeException("National code is already exists");
 
+        existStd = studentRepository.findByEmail(dto.getEmail());
+        if (existStd.isPresent() && existStd.get().getId() != dto.getId())
+            throw new RuntimeException("Email is already exists");
+
+        existStd = studentRepository.findByPhoneNumber(dto.getPhoneNumber());
+        if (existStd.isPresent() && existStd.get().getId() != dto.getId())
+            throw new RuntimeException("Phone number is already exists");
+
+        BeanUtils.copyProperties(dto, student);
+        studentRepository.save(student);
+        return findByEmail(dto.getEmail());
     }
-
 
     @Override
     public void create(StudentDto studentDto) {
@@ -126,9 +127,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(String username) {
 
-        var student = studentRepository.findById(id)
+        var student = studentRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
 
         studentRepository.delete(student);

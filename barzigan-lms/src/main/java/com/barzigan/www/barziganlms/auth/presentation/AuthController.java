@@ -3,6 +3,7 @@ package com.barzigan.www.barziganlms.auth.presentation;
 import com.barzigan.www.barziganlms.auth.model.AuthenticationResponse;
 import com.barzigan.www.barziganlms.auth.model.RegisterRequestDto;
 import com.barzigan.www.barziganlms.auth.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

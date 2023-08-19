@@ -26,6 +26,7 @@ public class AuthenticationResponse implements Serializable {
     private String lastName;
 
     private String email;
+    private String username;
 
     private String phoneNumber;
 

@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Data
-public class StudentDto implements Serializable {
+public class StudentUpdateDto implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 3270359019687867399L;
+    private static final long serialVersionUID = 3330359019687867399L;
 
     private Long id;
 
@@ -27,7 +27,6 @@ public class StudentDto implements Serializable {
 
     private String email;
 
-    private String password;
 
     private String phoneNumber;
 
@@ -43,24 +42,10 @@ public class StudentDto implements Serializable {
 
     private LocalDate birthDate;
 
-    private LocalDateTime registerDate;
-    private String role;
-    private String username;
 
 
-    private LocalDateTime registerOn;
 
-    private LocalDateTime lastLoginOn;
 
-    private boolean verified;
-
-    private boolean accountNonExpired;
-
-    private boolean accountNonLocked;
-
-    private boolean credentialsNonExpired;
-
-    private boolean enabled;
 
 
 }
