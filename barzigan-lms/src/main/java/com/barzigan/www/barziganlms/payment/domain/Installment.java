@@ -1,4 +1,4 @@
-package com.barzigan.www.barziganlms.payment;
+package com.barzigan.www.barziganlms.payment.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 @AllArgsConstructor
@@ -24,7 +24,7 @@ public class Installment implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
     private short partNo;
 
 

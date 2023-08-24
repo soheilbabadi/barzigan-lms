@@ -1,4 +1,4 @@
-package com.barzigan.www.barziganlms.payment;
+package com.barzigan.www.barziganlms.payment.domain;
 
 import com.barzigan.www.barziganlms.course.model.Course;
 import com.barzigan.www.barziganlms.person.model.Student;

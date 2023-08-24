@@ -1,7 +1,7 @@
 package com.barzigan.www.barziganlms.person.infra;
 
 import com.barzigan.www.barziganlms.course.model.Course;
-import com.barzigan.www.barziganlms.payment.Payment;
+import com.barzigan.www.barziganlms.payment.domain.Payment;
 import com.barzigan.www.barziganlms.person.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

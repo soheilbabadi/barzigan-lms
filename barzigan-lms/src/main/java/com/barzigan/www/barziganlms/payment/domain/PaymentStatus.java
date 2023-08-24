@@ -1,4 +1,4 @@
-package com.barzigan.www.barziganlms.payment;
+package com.barzigan.www.barziganlms.payment.domain;
 
 public enum PaymentStatus {
     PAID("paid"),
