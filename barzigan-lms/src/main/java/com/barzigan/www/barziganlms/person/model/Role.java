@@ -1,6 +1,9 @@
 package com.barzigan.www.barziganlms.person.model;
 
-public enum Role   {
+import lombok.Getter;
+
+@Getter
+public enum Role {
     STUDENT("student"),
     TEACHER("teacher"),
     ADMIN("admin");
@@ -9,10 +12,6 @@ public enum Role   {
 
     Role(String role) {
         this.role = role;
-    }
-
-    public String getRole() {
-        return role;
     }
 
 }

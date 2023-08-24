@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,18 +27,30 @@ public class Payment implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity = Student.class)
-    private Student student;
 
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity = Course.class)
-    private Course course;
+    @Column(nullable = false)
+    private BigDecimal price;
 
-    private long price;
+    @Column(nullable = false)
+    private BigDecimal discount;
+
+    @Column(nullable = false)
+    private boolean multiPayment;
 
     @Column(nullable = false)
     private LocalDateTime paymentDate;
 
     @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
-    private String paymentStatus;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+
+    @OneToMany(targetEntity = Installment.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "payment")
+    private List<Installment> installmentList;
+
+    @ManyToOne(cascade = CascadeType.ALL, targetEntity = Student.class)
+    private Student student;
+
+    @ManyToOne(cascade = CascadeType.ALL, targetEntity = Course.class)
+    private Course course;
 
 }
