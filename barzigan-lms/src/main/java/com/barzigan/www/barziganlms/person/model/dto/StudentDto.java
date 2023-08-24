@@ -1,4 +1,4 @@
-package com.barzigan.www.barziganlms.person.model;
+package com.barzigan.www.barziganlms.person.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

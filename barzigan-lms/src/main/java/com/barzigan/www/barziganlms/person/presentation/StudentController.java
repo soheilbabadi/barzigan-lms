@@ -2,7 +2,7 @@ package com.barzigan.www.barziganlms.person.presentation;
 
 
 import com.barzigan.www.barziganlms.person.application.StudentService;
-import com.barzigan.www.barziganlms.person.model.StudentUpdateDto;
+import com.barzigan.www.barziganlms.person.model.dto.StudentUpdateDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,12 +2,12 @@ package com.barzigan.www.barziganlms.auth.service;
 
 import com.barzigan.www.barziganlms.auth.model.AuthenticationResponse;
 import com.barzigan.www.barziganlms.auth.model.RegisterRequestDto;
+import com.barzigan.www.barziganlms.person.application.OtpService;
 import com.barzigan.www.barziganlms.person.infra.StudentRepository;
 import com.barzigan.www.barziganlms.person.model.Role;
 import com.barzigan.www.barziganlms.person.model.Student;
 import com.barzigan.www.barziganlms.security.JwtService;
 import com.barzigan.www.barziganlms.utils.RandomString;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.TimeZone;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,9 +26,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private OtpService otpService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
 
     @Override
     public AuthenticationResponse register(RegisterRequestDto dto) {
@@ -62,6 +65,8 @@ public class AuthServiceImpl implements AuthService {
                 .build();
 
         studentRepository.save(person);
+
+        otpService.save(person.getEmail());
 
         return generateResponse(person);
     }

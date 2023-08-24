@@ -43,8 +43,8 @@ public class AuthenticationResponse implements Serializable {
     private LocalDate birthDate;
 
     private LocalDateTime registerDate;
-    private String role;
 
+    private String role;
 
     private LocalDateTime registerOn;
 

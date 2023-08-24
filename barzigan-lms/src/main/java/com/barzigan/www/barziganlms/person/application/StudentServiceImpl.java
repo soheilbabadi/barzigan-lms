@@ -3,8 +3,9 @@ package com.barzigan.www.barziganlms.person.application;
 import com.barzigan.www.barziganlms.person.infra.StudentRepository;
 import com.barzigan.www.barziganlms.person.model.Role;
 import com.barzigan.www.barziganlms.person.model.Student;
-import com.barzigan.www.barziganlms.person.model.StudentDto;
-import com.barzigan.www.barziganlms.person.model.StudentUpdateDto;
+import com.barzigan.www.barziganlms.person.model.dto.StudentDto;
+import com.barzigan.www.barziganlms.person.model.dto.StudentUpdateDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.TimeZone;
 import static com.barzigan.www.barziganlms.utils.RandomString.gerRandomString;
 
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
