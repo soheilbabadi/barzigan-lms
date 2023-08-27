@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/course")
@@ -26,9 +28,8 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CourseDto> get(@PathVariable long id) {
-        var courseDto = courseService.getCourse(id);
-        return ResponseEntity.ok(courseDto);
+    public ResponseEntity<CourseDto> getById(@PathVariable long id) {
+        return ResponseEntity.ok(courseService.getCourse(id));
     }
 
 
@@ -39,8 +40,7 @@ public class CourseController {
     }
 
     @GetMapping
-    public ResponseEntity<CourseDto> getAll() {
-        var courseDtoList = courseService.getAll();
-        return ResponseEntity.ok().build();
+    public ResponseEntity<List<CourseDto>> getAll() {
+        return ResponseEntity.ok(courseService.getAll());
     }
 }

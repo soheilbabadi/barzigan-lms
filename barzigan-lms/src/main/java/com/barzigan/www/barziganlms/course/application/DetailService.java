@@ -9,7 +9,6 @@ import java.util.Set;
 public interface DetailService {
     void deleteById(long id);
 
-    void delete(Detail detail);
 
     void save(Detail detail);
 
