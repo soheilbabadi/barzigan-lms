@@ -23,7 +23,7 @@ public class StudentController {
         return new ResponseEntity<>(studentService.update(dto), HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable String username) {
         studentService.delete(username);
         return ResponseEntity.ok().build();

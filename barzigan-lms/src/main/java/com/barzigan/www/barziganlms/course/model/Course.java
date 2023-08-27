@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -24,20 +25,35 @@ public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @Column(nullable = false, length = 50, columnDefinition = "varchar(50)")
     private String title;
 
-
+    @Column(nullable = false)
     private LocalDateTime createdDate;
+
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
+
+    @Column(nullable = false)
+    private LocalDateTime startDate;
+
+    @Column(nullable = false)
     private LocalDateTime finishDate;
 
     @Column(nullable = false)
     private int capacity;
 
-    private int preRequirement;
+    @Column(nullable = false)
+    private BigDecimal tuition;
+
+
+@Column(nullable = false, length = 1000, columnDefinition = "varchar(1000)")
+    private String description;
+
+    @Column(nullable = false)
+    private boolean archived;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Topic> topics;
@@ -47,7 +63,5 @@ public class Course implements Serializable {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Payment> payments;
-
-
 
 }

@@ -21,7 +21,10 @@ public class Detail implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
+
+    @Column(nullable = false,length = 65535 ,columnDefinition = "varchar(65535)")
+    private String courseDetail;
 
     @ManyToOne(cascade = CascadeType.ALL, targetEntity = Course.class)
     private Course course;

@@ -20,7 +20,10 @@ public class Topic implements Serializable {
     private static final long serialVersionUID = 2150470412661935056L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
+
+    @Column(nullable = false, length = 150, columnDefinition = "varchar(150)")
+    private String title;
 
     @ManyToOne(cascade = CascadeType.ALL, targetEntity = Course.class)
     private Course course;

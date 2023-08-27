@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
-public interface OtpRepository extends JpaRepository<Otp, Integer> {
+public interface OtpRepository extends JpaRepository<Otp, Long> {
     Optional<Otp> findByEmailAndOtpAndExpireAtAfterAndUsed(String email, String otp, LocalDateTime localDateTime, boolean used);
 
     void deleteAllByExpireAtBeforeOrUsed(LocalDateTime localDateTime, boolean used);

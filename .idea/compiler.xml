@@ -16,9 +16,5 @@
         <module name="barzigan-lms.barzigan-lms.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="barzigan-lms.barzigan-lms.main~1" target="17" />
-      <module name="barzigan-lms.barzigan-lms.test~1" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
