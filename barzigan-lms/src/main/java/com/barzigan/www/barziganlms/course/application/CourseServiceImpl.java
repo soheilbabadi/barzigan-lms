@@ -7,6 +7,7 @@ import com.barzigan.www.barziganlms.course.model.Detail;
 import com.barzigan.www.barziganlms.course.model.Topic;
 import com.barzigan.www.barziganlms.utils.KeyValDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -50,16 +51,8 @@ public class CourseServiceImpl implements CourseService {
     public void updateCourse(CourseDto courseDto) {
         var course = courseRepository.findById(courseDto.getId())
                 .orElseThrow(() -> new NullPointerException("Course not found"));
-        course.setArchived(courseDto.isArchived());
-        course.setCapacity(courseDto.getCapacity());
-        course.setDescription(courseDto.getDescription());
-        course.setFinishDate(courseDto.getFinishDate());
-        course.setStartDate(courseDto.getStartDate());
-        course.setTuition(courseDto.getTuition());
-        course.setTitle(courseDto.getTitle());
+        BeanUtils.copyProperties(courseDto, course);
         course.setUpdatedDate(LocalDateTime.now(ZoneOffset.UTC));
-        course.setDetails(getDetails(courseDto.getDetails()));
-        course.setTopics(getTopics(courseDto.getTopics()));
         courseRepository.save(course);
 
     }
@@ -75,7 +68,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CourseDto getCourse(long id) {
-        var course = courseRepository.findById(id).orElseThrow(() -> new NullPointerException("Course not found"));
+        var course = courseRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Course not found"));
         return getCourseDto(course);
     }
 
