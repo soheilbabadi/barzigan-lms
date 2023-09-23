@@ -24,11 +24,6 @@ public class DetailServiceImpl implements DetailService {
     }
 
     @Override
-    public void delete(Detail detail) {
-        detailRepository.delete(detail);
-    }
-
-    @Override
     public void save(Detail detail) {
         detailRepository.save(detail);
     }
