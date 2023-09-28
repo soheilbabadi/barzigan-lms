@@ -1,4 +1,4 @@
-﻿package com.barzigan.www.barziganlms.utils;
+package com.barzigan.www.barziganlms.utils;
 
 
 import lombok.AllArgsConstructor;

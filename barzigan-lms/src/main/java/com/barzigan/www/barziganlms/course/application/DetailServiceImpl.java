@@ -1,4 +1,4 @@
-﻿package com.barzigan.www.barziganlms.course.application;
+package com.barzigan.www.barziganlms.course.application;
 
 import com.barzigan.www.barziganlms.course.infra.CourseRepository;
 import com.barzigan.www.barziganlms.course.infra.DetailRepository;

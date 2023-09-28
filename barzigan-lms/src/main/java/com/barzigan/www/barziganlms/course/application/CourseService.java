@@ -1,7 +1,5 @@
-﻿package com.barzigan.www.barziganlms.course.application;
-
+package com.barzigan.www.barziganlms.course.application;
 import com.barzigan.www.barziganlms.course.model.CourseDto;
-
 import java.util.List;
 
 public interface CourseService {

@@ -1,4 +1,4 @@
-﻿package com.barzigan.www.barziganlms.course.presentation;
+package com.barzigan.www.barziganlms.course.presentation;
 
 import com.barzigan.www.barziganlms.course.application.CourseService;
 import com.barzigan.www.barziganlms.course.model.CourseDto;

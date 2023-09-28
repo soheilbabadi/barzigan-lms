@@ -1,4 +1,4 @@
-﻿package com.barzigan.www.barziganlms.course.application;
+package com.barzigan.www.barziganlms.course.application;
 
 import com.barzigan.www.barziganlms.course.model.Topic;
 import com.barzigan.www.barziganlms.utils.KeyValDto;
